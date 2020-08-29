@@ -66,7 +66,7 @@ RUN echo 'snail:snail' |chpasswd
 
 
 # Unity https://gitlab.com/gableroux/unity3d#build-the-image 
-RUN sudo apt-get update && sudo apt-get install -y \
+RUN apt-get update && apt-get install -y \
 	libgtk2.0-0 \
 	libsoup2.4-1 \
 	libarchive13 \
@@ -76,27 +76,45 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	libcanberra-gtk-module \
 	libfuse2 \
 	libnss3 \
-	libasound2
+	libasound2 \
+	nautilus \
+	libxss1 \
+	libcwiid1 \
+	libcwiid-dev
 RUN wget https://beta.unity3d.com/download/60781d942082/UnitySetup-2019.4.8f1 -O UnitySetup && \
-    chmod +x UnitySetup && \
-    echo y | ./UnitySetup \
+    chmod +x UnitySetup
+RUN echo y | ./UnitySetup \
         --unattended \
-        --install-location=/opt/Unity \
+        --install-location=/opt/Unity-2019.4.8f1 \
         --verbose \
         --download-location=/tmp/unity \
         --components=Unity
 RUN rm UnitySetup && \
     mkdir -p $HOME/.local/share/unity3d/Certificates/ && \
-    sudo ln -s /opt/Unity/Editor/Unity /usr/bin/unity3d
+    ln -s /opt/Unity-2019.4.8f1/Editor/Unity /usr/bin/unity3d
 
 RUN wget https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.AppImage -O /home/snail/UnityHub.AppImage && \
     chmod +x /home/snail/UnityHub.AppImage
-    
-RUN sudo apt-get update && sudo apt-get install -y \
-	 nautilus \
-	 libxss1
 	 
-RUN sudo chown snail:snail -R /home/snail/.config/
+RUN chown snail:snail -R /home/snail/.config/
+
+#python 3.6
+RUN apt update && apt install -y \
+	software-properties-common && \
+    apt update && add-apt-repository -y \
+	ppa:deadsnakes/ppa && \
+    apt update && apt install -y \
+	python3.6 \
+	python3.6-dev
+#libpocofoundation50
+RUN wget http://archive.ubuntu.com/ubuntu/pool/universe/p/poco/libpocofoundation50_1.8.0.1-1ubuntu4_amd64.deb
+RUN apt install -y ./libpocofoundation50_1.8.0.1-1ubuntu4_amd64.deb
+#.net
+RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+RUN apt update && apt install -y \
+	dotnet-sdk-3.1 && \
+	aspnetcore-runtime-3.1
 
 #USER snail
 #RUN /home/snail/UnityHub.AppImage --no-sandbox --appimage-extract-and-run --headless install --version 2019.4.9f1 --module standardassets

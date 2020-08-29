@@ -104,7 +104,7 @@ Complete the following steps to create a new container:
     docker run --rm -it \
         --name maila-sim-container -h maila \
         --user "$(id -u):$(id -g)" \
-        --mount type=bind,src="$PWD"/../,dst=/mailamaca \
+        --mount type=bind,src="$PWD"/../Maila,dst=/home/snail/Workspace/Maila \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         --env DISPLAY=$DISPLAY \
         -p 2222:22 \
@@ -192,6 +192,10 @@ Complete the following steps to create a new container:
 
 
     # python 3.6 (https://askubuntu.com/questions/1106603/how-to-co-install-libpython3-5-with-libpython3-6-and-libpython3-7) 
+
+
+    #.net (https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu)
+    #ros2dotnet (https://github.com/ros2-dotnet/ros2_dotnet)
 
     RUN wget http://beta.unity3d.com/download/7807bc63c3ab/UnitySetup-2017.3.0p2 -O UnitySetup && \
     # make executable
