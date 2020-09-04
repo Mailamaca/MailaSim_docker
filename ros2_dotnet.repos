@@ -1,0 +1,33 @@
+repositories:
+
+  # ros2_dotnet
+
+  ament_dotnet/ament_cmake_export_assemblies:
+    type: git
+    url: https://github.com/esteve/ament_cmake_export_assemblies.git
+    version: master
+  dotnet/dotnet_cmake_module:
+    type: git
+    url: https://github.com/esteve/dotnet_cmake_module.git
+    version: master
+  dotnet/ros2_dotnet:
+    type: git
+    url: https://github.com/Mailamaca/ros2_dotnet
+    version: cyclone
+    
+    
+    
+
+  # interfaces 
+
+  interfaces/rcldotnet_custom_interfaces:
+    type: git
+    url: https://github.com/DynoRobotics/rcldotnet_custom_interfaces.git 
+    version: master
+
+  # NOTE(sam): Having some issues getting this to build without poco
+  # interfaces/geometry2:
+  #   type: git
+  #   url: https://github.com/ros2/geometry2.git
+  #   version: dashing
+

@@ -102,7 +102,7 @@ Complete the following steps to create a new container:
     Start as user:
     ``` bash
     docker run --rm -it \
-        --name maila-sim-container -h maila \
+        --name maila-sim-container2 -h maila \
         --user "$(id -u):$(id -g)" \
         --mount type=bind,src="$PWD"/../Maila,dst=/home/snail/Workspace/Maila \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -111,7 +111,7 @@ Complete the following steps to create a new container:
         --device /dev/fuse \
         --cap-add SYS_ADMIN \
         --security-opt apparmor:unconfined \
-        maila-sim-image
+        maila-sim-image2
     ```
 
     ``` bash
@@ -121,7 +121,7 @@ Complete the following steps to create a new container:
         --mount type=bind,src="$PWD"/../,dst=/mailamaca \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         --env DISPLAY=$DISPLAY \
-        maila-sim-image
+        maila-sim-image2
         
     ```
 2. **run unityhub and unity inside container**
@@ -219,7 +219,7 @@ Complete the following steps to create a new container:
 3. **Open a new terminal connected to the container (AS USER)**
 
     ``` bash
-    docker exec -it maila-sim-container bash
+    docker exec -it maila-sim-container2 bash
     ```
 
 4. **Open a new terminal connected to the container (AS ROOT)**
